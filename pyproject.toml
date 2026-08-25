@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spec_test"
+version = "0.1.0"
+description = "AI-powered API contract testing"
+readme = "README.md"
+authors = [{name = "Harman Hanjra", email = "harman@scalecraft.ai"}]
+license = "MIT"
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+requires-python = ">=3.9"
+dependencies = [
+    "click>=8.0.0",
+    "pyyaml>=6.0",
+    "openapi-spec-validator>=0.5.0",
+    "httpx>=0.24.0",
+    "jinja2>=3.0.0",   # for reporting
+    "pydantic>=2.0.0", # for data models
+]
+[project.optional-dependencies]
+test = ["pytest>=7.0", "pytest-asyncio", "pytest-mock", "ruff", "bandit"]
+dev = ["black", "isort", "mypy"]
+
+[project.scripts]
+spec-test = "spec_test.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spec_test"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "C", "B", "SIM"]
+ignore = ["E501", "B008"] # E501 line too long, B008 avoid do not call functions in default args
+target-version = "py39"
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+skips = ["B101", "B601"] # assert, shell injection (we don't use subprocess)

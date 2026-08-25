@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+.venv/
+venv/
+ENV/
+env/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+# Environment
+.env
+.env.local
+.env.*.local
+# Ruff/bandit outputs
+bandit-report.txt
+ruff-report.txt
+# Temporary test outputs
+tests/output/
